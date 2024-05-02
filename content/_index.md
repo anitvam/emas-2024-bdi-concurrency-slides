@@ -17,30 +17,71 @@ Via dell’Università 50, 47522 Cesena (FC), Italy </small>
 
 ---
 
-## BDI Agents
+<!-- ## BDI Agents
 
 Architettura BDI -> mettiamo il puntino su qual è l'architettura di riferimento
 
-Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza,
+Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza, -->
+
+# Context: BDI Agents
+
+
+{{% multicol %}}
+{{% col %}}
+
+<div class="text-center">
+
+- 1 semantics (__AgentSpeak(L)__)
+
+- 1 architecture
+
+- several implementations 
+  - focus on: Astra, GOAL, Jadex, JaKtA, <br />Jason, PHIDIAS, SPADE-BDI
+
+</div>
+
+{{% /col %}}
+{{% col %}}
+
+<div class="text-center">
+
+<img src="images/architecture.png"  width="80%"/>
+
+</div>
+
+{{% /col %}}
+{{% /multicol %}}
 
 ---
 
-## Computational Autonomy
+## Motivation
+
+> Insight: _the same architecture may be implemented in so many ways_
+> <br> (e.g., w.r.t. __concurrency__)
+- semantics _unaffected_
+- impact on practical properties such as __efficiency__ & __reproducibility__
+
+### Goals
+
+1. Devise concurrency patterns from the state-of-the-practice
+2. Classify BDI technologies accordingly
+
+---
+
+<!-- ## Computational Autonomy
 <br>
 
 - **Computational autonomy** is a pre-requisite for **autonomy** in software agents
-- Agent's control-flow &rarr; mainstream programming languages concurrency abstractions <br> (e.g., thread, process, ...) 
+- Agent's control-flow &rarr; mainstream programming languages concurrency abstractions <br> (e.g., thread, process, ...)  -->
 
+## Background
 
----
+- Agents, in general, have a control-loop
+  + __sense__, _then_ __deliberate__, _then_ __act__, repeat
 
-## Which concurrency abstraction is the most appropriate?
-
-- The selection of an appropriate concurrency model deeply impacts several aspects of the agent programming framework 
-  - The **efficiency** of the MAS may improve, but
-  - **predictability** and **reproducibility** may be affected.
-- **Capturing and controlling concurrency is crucial, <br />and they often are hidden under the framework abstractions** 
-
+- BDI agents are more _complex_
+  * e.g. sense implies collecting percepts, revising beliefs, etc.
+  * e.g. deliberate implies selecting plans, updating intentions, etc.
 
 ---
 
@@ -48,7 +89,7 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 
 We distinguish between **internal** and **external** concurrency
 
-{{% multicol %}}
+<!-- {{% multicol %}}
 {{% col %}} 
 
 <div class="text-center">
@@ -91,12 +132,16 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \\
 </div>
 
 {{% /col %}}
-{{% /multicol %}}
+{{% /multicol %}} -->
+
+> __Internal__ concurrency $\approx$ how agents schedule intentions internally
+
+> __External__ concurrency  $\approx$ how agents' control-loops are scheduled by the underlying platform
 
 ---
 
-## External Concurrency
-#### Which concurrency abstraction are considered to map Agents' execution?
+## Which concurrency abstractions?
+#### In practice, technological platforms support:
 
 - **Threads**
 - **Processes**
@@ -113,6 +158,18 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \\
 - **All-Agents-One-Executor** ( **1A1E** )
   - With a **fixed**-size thread pool
   - With a **variable**-size thread pool 
+
+---
+
+## Which concurrency abstraction is the most appropriate?
+
+- The selection of an appropriate concurrency model deeply impacts several aspects of the agent programming framework 
+  - The **efficiency** of the MAS may improve, but
+  <!-- TODO add example -->
+  - **predictability** and **reproducibility** may be affected.
+    <!-- TODO add example -->
+- **Capturing and controlling concurrency is crucial, <br />and they often are hidden under the framework abstractions** 
+
 
 ---
 
@@ -206,6 +263,24 @@ We selected actively-maintained and open source BDI programming frameworks:
 
 ## Results
 
-<img src="images/image.png" />
+
+| Model &rArr; <br /> Tech. &dArr; | **1A1T** | **AA1T** | **AA1EL** |  **AA1E** <br /> **fixed** | **1A1E** <br /> **variable** | **1A1P** |
+| --- | --- | --- | --- | --- | --- | --- |
+| **Astra** | $\sim$ | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ |  
+| **Goal** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} |  
+| **Jadex** | $\sim$ | {{< tick >}} {{< /tick >}} | $\sim$ | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} |  
+| **JaKtA** | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ |  
+| **Jason** | {{< tick >}} {{< /tick >}} | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ | {{< tick >}} {{< /tick >}} |  
+| **Phidias** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
+| **Spade-BDI** | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
  
+---
+
+## Conclusions
+
+It is necessary to separate BDI architecture from its actual execution
+ * **without impacting the architecture definition**
+ * **without necessarily knowing how to program concurrency abstractions**
+ * **choosing dynamically which concurrent execution suits the scenario**
+
 ---
