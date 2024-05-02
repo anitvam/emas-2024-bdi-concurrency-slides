@@ -216,6 +216,12 @@ Allows for various level of __granularity__:
 
 ---
 
+## One-Agent-One-Process( **1A1P** )
+
+![](./1a1p.svg)
+
+---
+
 ## Which concurrency abstraction is the most appropriate?
 
 - The selection of an appropriate concurrency model deeply impacts several aspects of the agent programming framework 
