@@ -154,9 +154,6 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 </div>
 </div>
 </section><section>
-
-
-<section data-shortcode-section="">
 <h2 id="common-concurrency-patterns-for-mas">Common concurrency patterns for MAS</h2>
 <ul>
 <li><strong>One-Agent-One-Thread</strong> ( <strong>1A1T</strong> )</li>
@@ -178,6 +175,7 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 </section><section>
 <h2 id="all-agents-one-executor--aa1e-">All-Agents-One-Executor ( <strong>AA1E</strong> )</h2>
 <p>Allows for various level of <strong>granularity</strong>:</p>
+
 <div class="multiCol "><div class="col col-50 "><p><img src="./aa1e.svg" alt=""></p>
 </div>
 <div class="col col-50 "><p><img src="./aa1e-bis.svg" alt=""></p>
@@ -189,8 +187,6 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 <blockquote>
 <p>All-Agents-One-Event-Loop (<strong>AA1EL</strong>) $\equiv$ AA1E with <em>just one thread</em></p>
 </blockquote>
-
-</section>
 </section><section>
 <h2 id="which-concurrency-abstraction-is-the-most-appropriate">Which concurrency abstraction is the most appropriate?</h2>
 <ul>
@@ -280,8 +276,12 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 <tbody>
 <tr>
 <td><strong>Astra</strong></td>
-<td>$\sim$</td>
-<td>$\sim$</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
 <td><span>
     <i class="fa fa-check" style="color: green;"></i>
      
@@ -294,7 +294,9 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
     <i class="fa fa-check" style="color: green;"></i>
      
 </span></td>
-<td>$\sim$</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
 </tr>
 <tr>
 <td><strong>Goal</strong></td>
@@ -325,13 +327,19 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 </tr>
 <tr>
 <td><strong>Jadex</strong></td>
-<td>$\sim$</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
 <td><span>
     <i class="fa fa-check" style="color: green;"></i>
      
 </span></td>
-<td>$\sim$</td>
-<td>$\sim$</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
 <td><span>
     <i class="fa fa-check" style="color: green;"></i>
      
@@ -363,7 +371,9 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
     <i class="fa fa-check" style="color: green;"></i>
      
 </span></td>
-<td>$\sim$</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
 </tr>
 <tr>
 <td><strong>Jason</strong></td>
@@ -371,7 +381,9 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
     <i class="fa fa-check" style="color: green;"></i>
      
 </span></td>
-<td>$\sim$</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
 <td><span>
     <i class="fa fa-check" style="color: green;"></i>
      
@@ -380,7 +392,9 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
     <i class="fa fa-check" style="color: green;"></i>
      
 </span></td>
-<td>$\sim$</td>
+<td><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+</td>
 <td><span>
     <i class="fa fa-check" style="color: green;"></i>
      
@@ -453,7 +467,9 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
     <i class="fa-solid fa-xmark" style="color: red;"></i>
      
 </span> $\equiv$ <strong>not</strong> supported</li>
-<li>$\sim$ $\equiv$ supported in principle, but requires the user to implement it</li>
+<li><span>
+    <i class="fa-solid fa-check" style="color: orange"></i> </span>
+ $\equiv$ supported in principle, <br>but requires the user to implement it</li>
 </ul>
 </section><section>
 <h2 id="discussion">Discussion</h2>
