@@ -169,8 +169,6 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \\
 
 ---
 
-{{% section %}}
-
 ## Common concurrency patterns for MAS
 
 
@@ -215,9 +213,6 @@ Allows for various level of __granularity__:
 > Different properties w.r.t. **fixed** or **variable** amount of worker threads ($N$)
 
 > All-Agents-One-Event-Loop (**AA1EL**) $\equiv$ AA1E with _just one thread_
-
-{{% /section %}}
-
 
 ---
 
@@ -326,11 +321,11 @@ We selected actively-maintained and open source BDI programming frameworks:
 
 | Model &rArr; <br /> Tech. &dArr; | **1A1T** | **AA1T** | **AA1EL** |  **AA1E** <br /> **fixed** | **AA1E** <br /> **variable** | **1A1P** |
 | --- | --- | --- | --- | --- | --- | --- |
-| **Astra** | $\sim$ | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ |  
+| **Astra** | {{< maybe >}} {{< /maybe >}} |  {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} |  
 | **Goal** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} |  
-| **Jadex** | $\sim$ | {{< tick >}} {{< /tick >}} | $\sim$ | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} |  
-| **JaKtA** | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ |  
-| **Jason** | {{< tick >}} {{< /tick >}} | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ | {{< tick >}} {{< /tick >}} |  
+| **Jadex** | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} |  
+| **JaKtA** | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} |  
+| **Jason** | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} |  
 | **Phidias** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
 | **Spade-BDI** | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
 
@@ -339,7 +334,7 @@ We selected actively-maintained and open source BDI programming frameworks:
 #### Legend
 - {{< tick >}} {{< /tick >}} $\equiv$ supported
 - {{< cross >}} {{< /cross >}} $\equiv$ __not__ supported
-- $\sim$ $\equiv$ supported in principle, but requires the user to implement it
+- {{< maybe >}} {{< /maybe >}} $\equiv$ supported in principle, <br />but requires the user to implement it
 
 ---
 
