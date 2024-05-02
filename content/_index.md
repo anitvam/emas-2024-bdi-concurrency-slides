@@ -23,7 +23,7 @@ Architettura BDI -> mettiamo il puntino su qual è l'architettura di riferimento
 
 Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza, -->
 
-# Context: BDI Agents
+# Context
 
 
 {{% multicol %}}
@@ -33,7 +33,7 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 
 - 1 semantics (__AgentSpeak(L)__)
 
-- 1 architecture
+- 1 architecture (__BDI__)
 
 - several implementations 
   - focus on: Astra, GOAL, Jadex, JaKtA, <br />Jason, PHIDIAS, SPADE-BDI
@@ -76,7 +76,7 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 
 ## Background
 
-- Agents, in general, have a control-loop
+- Agents lifecycle, in general, is a control-loop
   + __sense__, _then_ __deliberate__, _then_ __act__, repeat
 
 - BDI agents are more _complex_
@@ -155,7 +155,7 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \\
 - **One-Agent-One-Thread** ( **1A1T** )
 - **All-Agents-One-Thread** ( **AA1T** )
 - **All-Agents-One-Event-Loop** ( **AA1EL** )
-- **All-Agents-One-Executor** ( **1A1E** )
+- **All-Agents-One-Executor** ( **AA1E** )
   - With a **fixed**-size thread pool
   - With a **variable**-size thread pool 
 
@@ -223,15 +223,15 @@ We selected actively-maintained and open source BDI programming frameworks:
 
 ### Agent: PINGER
 
-```text
+```prolog
 !ping.
 +!ping <- 
     .revealCurrentThread("intention 1");
     .send(pong, tell, ball);
-    !!showThread(2);
+    !!showThread(2); /* Generates intention 2 */
     .revealCurrentThread("intention 1").
 +ball <-
-    !!showThread(4);
+    !!showThread(4); /* Generates intention 4 */
     .revealCurrentThread("intention 3").
 +!showThread(X) <- .revealCurrentThread("intention " + X).
 ```
@@ -245,11 +245,11 @@ We selected actively-maintained and open source BDI programming frameworks:
 
 ### Agent: PONGER
 
-```text
+```prolog
 +ball[source(X)] <-
     .revealCurrentThread("intention 5");
     .send(X, tell, ball);
-    !!showThread(6);
+    !!showThread(6); /* Generates intention 6 */
     .revealCurrentThread("intention 5").
 +!showThread(X) <- .revealCurrentThread("intention " + X).
 ```
@@ -264,7 +264,7 @@ We selected actively-maintained and open source BDI programming frameworks:
 ## Results
 
 
-| Model &rArr; <br /> Tech. &dArr; | **1A1T** | **AA1T** | **AA1EL** |  **AA1E** <br /> **fixed** | **1A1E** <br /> **variable** | **1A1P** |
+| Model &rArr; <br /> Tech. &dArr; | **1A1T** | **AA1T** | **AA1EL** |  **AA1E** <br /> **fixed** | **AA1E** <br /> **variable** | **1A1P** |
 | --- | --- | --- | --- | --- | --- | --- |
 | **Astra** | $\sim$ | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ |  
 | **Goal** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} |  
