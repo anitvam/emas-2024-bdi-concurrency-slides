@@ -333,6 +333,24 @@ We selected actively-maintained and open source BDI programming frameworks:
 | **Jason** | {{< tick >}} {{< /tick >}} | $\sim$ | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | $\sim$ | {{< tick >}} {{< /tick >}} |  
 | **Phidias** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
 | **Spade-BDI** | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
+
+<br>
+
+#### Legend
+- {{< tick >}} {{< /tick >}} $\equiv$ supported
+- {{< cross >}} {{< /cross >}} $\equiv$ __not__ supported
+- $\sim$ $\equiv$ supported in principle, but requires the user to implement it
+
+---
+
+## Discussion
+
+> __Takeaway 1__: better for a BDI framework to support _multiple_ concurrency patterns
+
+> __Takeaway 2__: even better for a BDI framework to support concurrency patterns _customisability_ on the __user-side__ 
++ supporting e.g. __comparing__ perfomance among different concurrency patterns, for the same MAS
++ supporting e.g. _prioritising_ __determinism__ over __efficiency__ (AA1T) for __testing__ 
++ supporting e.g. _prioritising_ __indipendence__ of control flows (1A1T) for __I/O-bound__ tasks 
  
 ---
 
