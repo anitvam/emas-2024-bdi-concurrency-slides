@@ -24,6 +24,7 @@ Architettura BDI -> mettiamo il puntino su qual è l'architettura di riferimento
 Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza, -->
 
 # Context
+## BDI Agents Programming
 
 
 {{% multicol %}}
@@ -31,9 +32,9 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 
 <div class="text-center">
 
-- 1 semantics (__AgentSpeak(L)__)
+- most famous semantics: __AgentSpeak(L)__
 
-- 1 architecture (__BDI__)
+- most famous architecture (see picture)
 
 - several implementations 
   - focus on: Astra, GOAL, Jadex, JaKtA, <br />Jason, PHIDIAS, SPADE-BDI
@@ -82,6 +83,8 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 - BDI agents are more _complex_
   * e.g. sense implies collecting percepts, revising beliefs, etc.
   * e.g. deliberate implies selecting plans, updating intentions, etc.
+
+![](./bdi.svg)
 
 ---
 
@@ -143,14 +146,33 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \\
 ## Which concurrency abstractions?
 #### In practice, technological platforms support:
 
-- **Threads**
+{{% multicol %}}
+{{% col %}}
+
+<div class="text-center">
+
 - **Processes**
+- **Threads**
 - **Event Loops**
 - **Executors**
 
+</div>
+
+{{% /col %}}
+{{% col %}}
+
+![](./concurrency-abstractions.svg)
+
+{{% /col %}}
+{{% /multicol %}}
+
+
 ---
 
+{{% section %}}
+
 ## Common concurrency patterns for MAS
+
 
 - **One-Agent-One-Thread** ( **1A1T** )
 - **All-Agents-One-Thread** ( **AA1T** )
@@ -158,6 +180,44 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \\
 - **All-Agents-One-Executor** ( **AA1E** )
   - With a **fixed**-size thread pool
   - With a **variable**-size thread pool 
+
+---
+
+## One-Agent-One-Thread ( **1A1T** )
+
+![](./1a1t.svg)
+
+---
+
+## All-Agents-One-Thread ( **AA1T** )
+
+![](./aa1t.svg)
+
+---
+
+## All-Agents-One-Executor ( **AA1E** )
+
+Allows for various level of __granularity__:
+
+{{% multicol %}}
+{{% col %}}
+
+![](./aa1e.svg)
+
+{{% /col %}}
+{{% col %}}
+
+![](./aa1e-bis.svg)
+
+{{% /col %}}
+{{% /multicol %}}
+
+> Different properties w.r.t. **fixed** or **variable** amount of worker threads ($N$)
+
+> All-Agents-One-Event-Loop (**AA1EL**) $\equiv$ AA1E with _just one thread_
+
+{{% /section %}}
+
 
 ---
 
