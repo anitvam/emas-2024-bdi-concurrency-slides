@@ -37,7 +37,7 @@ Via dell’Università 50, 47522 Cesena (FC), Italy </small></p>
 Architettura BDI -> mettiamo il puntino su qual è l'architettura di riferimento
 
 Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza, -->
-<h1 id="context-bdi-agents">Context: BDI Agents</h1>
+<h1 id="context">Context</h1>
 
 <div class="multiCol "><div class="col col-50 "><div class="text-center">
 <ul>
@@ -45,7 +45,7 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 <p>1 semantics (<strong>AgentSpeak(L)</strong>)</p>
 </li>
 <li>
-<p>1 architecture</p>
+<p>1 architecture (<strong>BDI</strong>)</p>
 </li>
 <li>
 <p>several implementations</p>
@@ -85,7 +85,7 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 <h2 id="background">Background</h2>
 <ul>
 <li>
-<p>Agents, in general, have a control-loop</p>
+<p>Agents lifecycle, in general, is a control-loop</p>
 <ul>
 <li><strong>sense</strong>, <em>then</em> <strong>deliberate</strong>, <em>then</em> <strong>act</strong>, repeat</li>
 </ul>
@@ -150,7 +150,7 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 <li><strong>One-Agent-One-Thread</strong> ( <strong>1A1T</strong> )</li>
 <li><strong>All-Agents-One-Thread</strong> ( <strong>AA1T</strong> )</li>
 <li><strong>All-Agents-One-Event-Loop</strong> ( <strong>AA1EL</strong> )</li>
-<li><strong>All-Agents-One-Executor</strong> ( <strong>1A1E</strong> )
+<li><strong>All-Agents-One-Executor</strong> ( <strong>AA1E</strong> )
 <ul>
 <li>With a <strong>fixed</strong>-size thread pool</li>
 <li>With a <strong>variable</strong>-size thread pool</li>
@@ -206,26 +206,26 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 
 <div class="multiCol "><div class="col col-50 "><div class="text-center">
 <h3 id="agent-pinger">Agent: PINGER</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>!ping.
-</span></span><span style="display:flex;"><span>+!ping &lt;- 
-</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 1");
-</span></span><span style="display:flex;"><span>    .send(pong, tell, ball);
-</span></span><span style="display:flex;"><span>    !!showThread(2);
-</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 1").
-</span></span><span style="display:flex;"><span>+ball &lt;-
-</span></span><span style="display:flex;"><span>    !!showThread(4);
-</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 3").
-</span></span><span style="display:flex;"><span>+!showThread(X) &lt;- .revealCurrentThread("intention " + X).
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-weight:bold">!</span><span style="color:#4e9a06">ping</span><span style="color:#000;font-weight:bold">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#4e9a06">+</span><span style="color:#000;font-weight:bold">!</span><span style="color:#4e9a06">ping</span> <span style="color:#4e9a06">&lt;-</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">.</span><span style="color:#000">revealCurrentThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"intention 1"</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">.</span><span style="color:#000">send</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">pong</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">tell</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">ball</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">!!</span><span style="color:#000">showThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#8f5902;font-style:italic">/* Generates intention 2 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">.</span><span style="color:#000">revealCurrentThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"intention 1"</span><span style="color:#000;font-weight:bold">).</span>
+</span></span><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">+</span><span style="color:#4e9a06">ball</span> <span style="color:#4e9a06">&lt;-</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">!!</span><span style="color:#000">showThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#8f5902;font-style:italic">/* Generates intention 4 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">.</span><span style="color:#000">revealCurrentThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"intention 3"</span><span style="color:#000;font-weight:bold">).</span>
+</span></span><span style="display:flex;"><span><span style="color:#4e9a06">+</span><span style="color:#000;font-weight:bold">!</span><span style="color:#000">showThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">X</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#4e9a06">&lt;-</span> <span style="color:#000;font-weight:bold">.</span><span style="color:#000">revealCurrentThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"intention "</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">X</span><span style="color:#000;font-weight:bold">).</span>
 </span></span></code></pre></div></div>
 </div>
 <div class="col col-50 "><div class="text-center">
 <h3 id="agent-ponger">Agent: PONGER</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>+ball[source(X)] &lt;-
-</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 5");
-</span></span><span style="display:flex;"><span>    .send(X, tell, ball);
-</span></span><span style="display:flex;"><span>    !!showThread(6);
-</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 5").
-</span></span><span style="display:flex;"><span>+!showThread(X) &lt;- .revealCurrentThread("intention " + X).
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#ce5c00;font-weight:bold">+</span><span style="color:#4e9a06">ball</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">X</span><span style="color:#000;font-weight:bold">)]</span> <span style="color:#4e9a06">&lt;-</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">.</span><span style="color:#000">revealCurrentThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"intention 5"</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">.</span><span style="color:#000">send</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">X</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">tell</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">ball</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">!!</span><span style="color:#000">showThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">6</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#8f5902;font-style:italic">/* Generates intention 6 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">.</span><span style="color:#000">revealCurrentThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"intention 5"</span><span style="color:#000;font-weight:bold">).</span>
+</span></span><span style="display:flex;"><span><span style="color:#4e9a06">+</span><span style="color:#000;font-weight:bold">!</span><span style="color:#000">showThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">X</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#4e9a06">&lt;-</span> <span style="color:#000;font-weight:bold">.</span><span style="color:#000">revealCurrentThread</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"intention "</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">X</span><span style="color:#000;font-weight:bold">).</span>
 </span></span></code></pre></div></div>
 </div>
 </div>
@@ -239,7 +239,7 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 <th><strong>AA1T</strong></th>
 <th><strong>AA1EL</strong></th>
 <th><strong>AA1E</strong> <br> <strong>fixed</strong></th>
-<th><strong>1A1E</strong> <br> <strong>variable</strong></th>
+<th><strong>AA1E</strong> <br> <strong>variable</strong></th>
 <th><strong>1A1P</strong></th>
 </tr>
 </thead>
