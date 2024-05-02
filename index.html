@@ -32,6 +32,10 @@ Danilo Pianini, <strong>Alessandro Ricci</strong>, and Andrea Omicini</p>
 Alma Mater Studiorum — Università di Bologna <br>
 Via dell’Università 50, 47522 Cesena (FC), Italy </small></p>
 </section><section>
+<h2 id="bdi-agents">BDI Agents</h2>
+<p>Architettura BDI -&gt; mettiamo il puntino su qual è l’architettura di riferimento</p>
+<p>Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza,</p>
+</section><section>
 <h2 id="computational-autonomy">Computational Autonomy</h2>
 <br>
 <ul>
@@ -56,10 +60,10 @@ Via dell’Università 50, 47522 Cesena (FC), Italy </small></p>
 <div class="multiCol "><div class="col col-50 "><div class="text-center">
 <h3 id="internal-concurrency">Internal Concurrency</h3>
 <p>\begin{aligned}
-Agent ::== Sense \parallel Deliberate \parallel Act
+Agent ::== Perceive \parallel Deliberate \parallel Act
 \end{aligned}</p>
 <p>\begin{aligned}
-Sense ::== (Sense_1 \parallel \ldots \parallel Sense_M) \cdot Sense
+Perceive ::== (\verb|perceive|_1 \parallel \ldots \parallel \verb|perceive|_M) \cdot Sense
 \end{aligned}</p>
 <p>\begin{aligned}
 Deliberate ::== (Deliberate_1 \parallel \ldots \parallel Deliberate_L) \cdot Deliberate
@@ -80,6 +84,87 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 </div>
 </div>
 </div>
+</section><section>
+<h2 id="external-concurrency">External Concurrency</h2>
+<h4 id="which-concurrency-abstraction-are-considered-to-map-agents-execution">Which concurrency abstraction are considered to map Agents’ execution?</h4>
+<ul>
+<li><strong>Threads</strong></li>
+<li><strong>Processes</strong></li>
+<li><strong>Event Loops</strong></li>
+<li><strong>Executors</strong></li>
+</ul>
+</section><section>
+<h2 id="common-concurrency-patterns-for-mas">Common concurrency patterns for MAS</h2>
+<ul>
+<li><strong>One-Agent-One-Thread</strong> ( <strong>1A1T</strong> )</li>
+<li><strong>All-Agents-One-Thread</strong> ( <strong>AA1T</strong> )</li>
+<li><strong>All-Agents-One-Event-Loop</strong> ( <strong>AA1EL</strong> )</li>
+<li><strong>All-Agents-One-Executor</strong> ( <strong>1A1E</strong> )
+<ul>
+<li>With a <strong>fixed</strong>-size thread pool</li>
+<li>With a <strong>variable</strong>-size thread pool</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="analysis-on-bdi-frameworks">Analysis on BDI frameworks:</h2>
+
+<div class="multiCol "><div class="col col-50 "><div class="text-center">
+<h3 id="methodology">Methodology</h3>
+<p>We inspected external concurrency in three steps:</p>
+<ol>
+<li><strong>Empirical Evaluation</strong> through a synthetic benchmark</li>
+<li><strong>Documentation</strong> and <strong>source code inspection</strong> of the selected BDI frameworks</li>
+<li><strong>Direct contact</strong> with maintainers</li>
+</ol>
+</div>
+</div>
+<div class="col col-50 "><div class="text-center">
+<h3 id="framework-selection">Framework selection</h3>
+<p>We selected actively-maintained and open source BDI programming frameworks:</p>
+<ul>
+<li><strong>Astra</strong></li>
+<li><strong>GOAL</strong></li>
+<li><strong>Jadex</strong></li>
+<li><strong>JaKtA</strong></li>
+<li><strong>Jason</strong></li>
+<li><strong>PHIDIAS</strong></li>
+<li><strong>SPADE-BDI</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="benchmark">Benchmark</h2>
+
+<div class="multiCol "><div class="col col-50 "><div class="text-center">
+<h3 id="agent-pinger">Agent: PINGER</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>!ping.
+</span></span><span style="display:flex;"><span>+!ping &lt;- 
+</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 1");
+</span></span><span style="display:flex;"><span>    .send(pong, tell, ball);
+</span></span><span style="display:flex;"><span>    !!showThread(2);
+</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 1").
+</span></span><span style="display:flex;"><span>+ball &lt;-
+</span></span><span style="display:flex;"><span>    !!showThread(4);
+</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 3").
+</span></span><span style="display:flex;"><span>+!showThread(X) &lt;- .revealCurrentThread("intention " + X).
+</span></span></code></pre></div></div>
+</div>
+<div class="col col-50 "><div class="text-center">
+<h3 id="agent-ponger">Agent: PONGER</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>+ball[source(X)] &lt;-
+</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 5");
+</span></span><span style="display:flex;"><span>    .send(X, tell, ball);
+</span></span><span style="display:flex;"><span>    !!showThread(6);
+</span></span><span style="display:flex;"><span>    .revealCurrentThread("intention 5").
+</span></span><span style="display:flex;"><span>+!showThread(X) &lt;- .revealCurrentThread("intention " + X).
+</span></span></code></pre></div></div>
+</div>
+</div>
+</section><section>
+<h2 id="results">Results</h2>
+<img src="images/image.png">
 </section><section>
 </section>
 
