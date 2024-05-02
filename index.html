@@ -38,14 +38,15 @@ Architettura BDI -> mettiamo il puntino su qual è l'architettura di riferimento
 
 Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza, -->
 <h1 id="context">Context</h1>
+<h2 id="bdi-agents-programming">BDI Agents Programming</h2>
 
 <div class="multiCol "><div class="col col-50 "><div class="text-center">
 <ul>
 <li>
-<p>1 semantics (<strong>AgentSpeak(L)</strong>)</p>
+<p>most famous semantics: <strong>AgentSpeak(L)</strong></p>
 </li>
 <li>
-<p>1 architecture (<strong>BDI</strong>)</p>
+<p>most famous architecture (see picture)</p>
 </li>
 <li>
 <p>several implementations</p>
@@ -98,6 +99,7 @@ Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la c
 </ul>
 </li>
 </ul>
+<p><img src="./bdi.svg" alt=""></p>
 </section><section>
 <h2 id="which-concurrency">Which concurrency?</h2>
 <p>We distinguish between <strong>internal</strong> and <strong>external</strong> concurrency</p>
@@ -138,13 +140,23 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 </section><section>
 <h2 id="which-concurrency-abstractions">Which concurrency abstractions?</h2>
 <h4 id="in-practice-technological-platforms-support">In practice, technological platforms support:</h4>
+
+<div class="multiCol "><div class="col col-50 "><div class="text-center">
 <ul>
-<li><strong>Threads</strong></li>
 <li><strong>Processes</strong></li>
+<li><strong>Threads</strong></li>
 <li><strong>Event Loops</strong></li>
 <li><strong>Executors</strong></li>
 </ul>
+</div>
+</div>
+<div class="col col-50 "><p><img src="./concurrency-abstractions.svg" alt=""></p>
+</div>
+</div>
 </section><section>
+
+
+<section data-shortcode-section="">
 <h2 id="common-concurrency-patterns-for-mas">Common concurrency patterns for MAS</h2>
 <ul>
 <li><strong>One-Agent-One-Thread</strong> ( <strong>1A1T</strong> )</li>
@@ -157,6 +169,28 @@ Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \
 </ul>
 </li>
 </ul>
+</section><section>
+<h2 id="one-agent-one-thread--1a1t-">One-Agent-One-Thread ( <strong>1A1T</strong> )</h2>
+<p><img src="./1a1t.svg" alt=""></p>
+</section><section>
+<h2 id="all-agents-one-thread--aa1t-">All-Agents-One-Thread ( <strong>AA1T</strong> )</h2>
+<p><img src="./aa1t.svg" alt=""></p>
+</section><section>
+<h2 id="all-agents-one-executor--aa1e-">All-Agents-One-Executor ( <strong>AA1E</strong> )</h2>
+<p>Allows for various level of <strong>granularity</strong>:</p>
+<div class="multiCol "><div class="col col-50 "><p><img src="./aa1e.svg" alt=""></p>
+</div>
+<div class="col col-50 "><p><img src="./aa1e-bis.svg" alt=""></p>
+</div>
+</div>
+<blockquote>
+<p>Different properties w.r.t. <strong>fixed</strong> or <strong>variable</strong> amount of worker threads ($N$)</p>
+</blockquote>
+<blockquote>
+<p>All-Agents-One-Event-Loop (<strong>AA1EL</strong>) $\equiv$ AA1E with <em>just one thread</em></p>
+</blockquote>
+
+</section>
 </section><section>
 <h2 id="which-concurrency-abstraction-is-the-most-appropriate">Which concurrency abstraction is the most appropriate?</h2>
 <ul>
