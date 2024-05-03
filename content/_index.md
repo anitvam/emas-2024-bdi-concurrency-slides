@@ -361,5 +361,3 @@ It is necessary to separate BDI architecture from its actual execution
  * **without impacting the architecture definition**
  * **without necessarily knowing how to program concurrency abstractions**
  * **choosing dynamically which concurrent execution suits the scenario**
-
----
