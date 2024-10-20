@@ -3,4 +3,5 @@
   "extends": [
     "local>DanySK/renovate-config"
   ]
+  "assignees": [ "anitvam" ]
 }
